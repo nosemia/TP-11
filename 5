@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Vehiculo {
+public:
+    string marca;
+    string modelo;
+    int anio;
+
+    Vehiculo(string ma, string mo, int a) {
+        marca = ma;
+        modelo = mo;
+        anio = a;
+    }
+
+    void mostrarDatos() {
+        cout << "Marca: " << marca << endl;
+        cout << "Modelo: " << modelo << endl;
+        cout << "Anio: " << anio << endl;
+    }
+};
+
+class Coche : public Vehiculo {
+public:
+    int puertas;
+
+    Coche(string ma, string mo, int a, int p)
+        : Vehiculo(ma, mo, a) {
+        puertas = p;
+    }
+};
+
+class Motocicleta : public Vehiculo {
+public:
+    int cilindrada;
+
+    Motocicleta(string ma, string mo, int a, int c)
+        : Vehiculo(ma, mo, a) {
+        cilindrada = c;
+    }
+};
+
+class Camion : public Vehiculo {
+public:
+    float carga;
+
+    Camion(string ma, string mo, int a, float ca)
+        : Vehiculo(ma, mo, a) {
+        carga = ca;
+    }
+};
+
+int main() {
+    Coche coche("Fiat", "Cronos", 2024, 4);
+    Motocicleta moto("Honda", "Wave", 2023, 110);
+    Camion camion("Mercedes", "Atego", 2022, 5000);
+
+    coche.mostrarDatos();
+    cout << "Puertas: " << coche.puertas << endl;
+
+    moto.mostrarDatos();
+    cout << "Cilindrada: " << moto.cilindrada << endl;
+
+    camion.mostrarDatos();
+    cout << "Carga: " << camion.carga << endl;
+
+    return 0;
+}
