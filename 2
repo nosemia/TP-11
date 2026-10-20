@@ -1,0 +1,78 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Mesa {
+public:
+    int numero;
+    int comensales;
+    bool ocupada;
+
+    Mesa(int n, int c) {
+        numero = n;
+        comensales = c;
+        ocupada = false;
+    }
+};
+
+class Restaurante {
+private:
+    vector<Mesa> mesas;
+
+public:
+    void agregarMesa(Mesa mesa) {
+        mesas.push_back(mesa);
+    }
+
+    void reservarMesa(int numero) {
+        for (int i = 0; i < mesas.size(); i++) {
+            if (mesas[i].numero == numero && !mesas[i].ocupada) {
+                mesas[i].ocupada = true;
+                cout << "Mesa reservada" << endl;
+                return;
+            }
+        }
+        cout << "La mesa no esta disponible" << endl;
+    }
+
+    void liberarMesa(int numero) {
+        for (int i = 0; i < mesas.size(); i++) {
+            if (mesas[i].numero == numero && mesas[i].ocupada) {
+                mesas[i].ocupada = false;
+                cout << "Mesa liberada" << endl;
+                return;
+            }
+        }
+        cout << "La mesa ya esta libre o no existe" << endl;
+    }
+
+    int mesasLibres() {
+        int total = 0;
+
+        for (int i = 0; i < mesas.size(); i++) {
+            if (!mesas[i].ocupada) {
+                total++;
+            }
+        }
+
+        return total;
+    }
+};
+
+int main() {
+    Restaurante restaurante;
+
+    restaurante.agregarMesa(Mesa(1, 4));
+    restaurante.agregarMesa(Mesa(2, 2));
+    restaurante.agregarMesa(Mesa(3, 6));
+
+    restaurante.reservarMesa(1);
+
+    cout << "Mesas libres: " << restaurante.mesasLibres() << endl;
+
+    restaurante.liberarMesa(1);
+
+    cout << "Mesas libres: " << restaurante.mesasLibres() << endl;
+
+    return 0;
+}
