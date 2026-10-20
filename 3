@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Empleado {
+public:
+    string nombre;
+    float salario;
+    string departamento;
+
+    Empleado(string n, float s, string d) {
+        nombre = n;
+        salario = s;
+        departamento = d;
+    }
+};
+
+class Empresa {
+private:
+    vector<Empleado> empleados;
+
+public:
+    void agregarEmpleado(Empleado empleado) {
+        empleados.push_back(empleado);
+    }
+
+    float calcularNomina() {
+        float total = 0;
+
+        for (int i = 0; i < empleados.size(); i++) {
+            total = total + empleados[i].salario;
+        }
+
+        return total;
+    }
+
+    void mayorSalario() {
+        if (empleados.size() == 0) {
+            cout << "No hay empleados" << endl;
+            return;
+        }
+
+        int mayor = 0;
+
+        for (int i = 1; i < empleados.size(); i++) {
+            if (empleados[i].salario > empleados[mayor].salario) {
+                mayor = i;
+            }
+        }
+
+        cout << "Empleado con mayor salario: "
+             << empleados[mayor].nombre << endl;
+    }
+
+    void buscarDepartamento(string departamento) {
+        for (int i = 0; i < empleados.size(); i++) {
+            if (empleados[i].departamento == departamento) {
+                cout << empleados[i].nombre << endl;
+            }
+        }
+    }
+};
+
+int main() {
+    Empresa empresa;
+
+    empresa.agregarEmpleado(Empleado("Juan", 500000, "Ventas"));
+    empresa.agregarEmpleado(Empleado("Maria", 700000, "Administracion"));
+    empresa.agregarEmpleado(Empleado("Pedro", 600000, "Ventas"));
+
+    cout << "Nomina total: " << empresa.calcularNomina() << endl;
+
+    empresa.mayorSalario();
+
+    cout << "Empleados de Ventas:" << endl;
+    empresa.buscarDepartamento("Ventas");
+
+    return 0;
+}
