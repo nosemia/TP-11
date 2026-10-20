@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+
+class Conversor {
+public:
+    // De metros a centimetros
+    float convertir(float metros) {
+        return metros * 100;
+    }
+
+    // De kilogramos a gramos
+    int convertir(int kilogramos) {
+        return kilogramos * 1000;
+    }
+
+    // De Celsius a Fahrenheit
+    float convertir(float celsius, char escala) {
+        if (escala == 'F') {
+            return (celsius * 9 / 5) + 32;
+        }
+
+        return celsius;
+    }
+};
+
+int main() {
+    Conversor c;
+
+    cout << "Metros a centimetros: "
+         << c.convertir(5.0f) << endl;
+
+    cout << "Kilogramos a gramos: "
+         << c.convertir(3) << endl;
+
+    cout << "Celsius a Fahrenheit: "
+         << c.convertir(25.0f, 'F') << endl;
+
+    return 0;
+}
