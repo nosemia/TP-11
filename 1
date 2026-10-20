@@ -1,0 +1,74 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+class Libro {
+public:
+    string titulo;
+    string autor;
+    int paginas;
+
+    Libro(string t, string a, int p) {
+        titulo = t;
+        autor = a;
+        paginas = p;
+    }
+};
+
+class Biblioteca {
+private:
+    vector<Libro> libros;
+
+public:
+    void agregarLibro(Libro libro) {
+        libros.push_back(libro);
+    }
+
+    void eliminarLibro(string titulo) {
+        for (int i = 0; i < libros.size(); i++) {
+            if (libros[i].titulo == titulo) {
+                libros.erase(libros.begin() + i);
+                cout << "Libro eliminado" << endl;
+                return;
+            }
+        }
+        cout << "No se encontro el libro" << endl;
+    }
+
+    void buscarLibro(string titulo) {
+        for (int i = 0; i < libros.size(); i++) {
+            if (libros[i].titulo == titulo) {
+                cout << "Libro encontrado: " << libros[i].titulo << endl;
+                cout << "Autor: " << libros[i].autor << endl;
+                return;
+            }
+        }
+        cout << "No se encontro el libro" << endl;
+    }
+
+    int totalPaginas() {
+        int total = 0;
+
+        for (int i = 0; i < libros.size(); i++) {
+            total = total + libros[i].paginas;
+        }
+
+        return total;
+    }
+};
+
+int main() {
+    Biblioteca biblioteca;
+
+    biblioteca.agregarLibro(Libro("El principito", "Antoine", 100));
+    biblioteca.agregarLibro(Libro("Harry Potter", "J.K. Rowling", 300));
+
+    biblioteca.buscarLibro("El principito");
+
+    cout << "Total de paginas: " << biblioteca.totalPaginas() << endl;
+
+    biblioteca.eliminarLibro("El principito");
+
+    return 0;
+}
